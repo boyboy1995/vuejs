@@ -14,8 +14,10 @@
         </p>
         <h2>Todos</h2>
         <ul v-if="showTodos">
-          <li v-for="todo in todos">
-            {{todo.title}}
+          <li v-for="(todo,index) in todos">
+            <!-- must include index after the todo element in the todos only able to remove from
+          the removeTodo function below, the youtube tutorial gets warning without it -->
+            <span>{{todo.title}}</span><button type="button" v-on:click="removeTodo(index)"> Remove</button>
           </li>
         </ul>
         <p v-else>
@@ -24,6 +26,15 @@
         <p>
           Showing Todos or not: {{showTodos}}
           <input type="checkbox" v-model="showTodos">
+        </p>
+
+        <p>
+          <input type="text" v-model="todoInput" v-on:keyup.esc="clearTodo" v-on:keyup.enter="createNewList">
+        </p>
+
+        <p>
+          Count = {{count}}
+          <button type="button" v-on:click="upCount">increase count</button>
         </p>
     </div>
   <script src="vue.js" charset="utf-8"></script>
